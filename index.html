@@ -1,100 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
-  <title>TimeCard</title>
-  <link rel="manifest" href="manifest.json"/>
-  <meta name="theme-color" content="#0c0d10"/>
-  <meta name="apple-mobile-web-app-capable" content="yes"/>
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
-  <meta name="apple-mobile-web-app-title" content="TimeCard"/>
-  <link rel="apple-touch-icon" href="icons/icon-192.png"/>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230c0d10'/%3E%3Ccircle cx='16' cy='16' r='10' fill='none' stroke='%234f8ef7' stroke-width='1.5'/%3E%3Cline x1='16' y1='16' x2='16' y2='8' stroke='%234f8ef7' stroke-width='1.5' stroke-linecap='round'/%3E%3Cline x1='16' y1='16' x2='21' y2='19' stroke='%23f1f2f5' stroke-width='1.2' stroke-linecap='round'/%3E%3C/svg%3E"/>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="style.css"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0f1117">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="TimeCard">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<title>TimeCard</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- ── LOGIN ── -->
-<div id="login-screen" class="login-screen hidden">
-  <div class="login-box">
-    <div class="login-logo">
-      <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-        <circle cx="16" cy="16" r="14" stroke="#4f8ef7" stroke-width="2"/>
-        <path d="M16 8v8l5 3" stroke="#4f8ef7" stroke-width="2" stroke-linecap="round"/>
+<!-- LOGIN -->
+<div id="login">
+  <div class="lbox">
+    <div class="llogo">
+      <svg width="38" height="38" viewBox="0 0 38 38" fill="none">
+        <circle cx="19" cy="19" r="17" stroke="#5b8ff9" stroke-width="3"/>
+        <path d="M19 10v9l7 5" stroke="#5b8ff9" stroke-width="3" stroke-linecap="round"/>
       </svg>
-      <span>TimeCard</span>
+      TimeCard
     </div>
-    <h1 id="login-title">Welcome back</h1>
-    <p id="login-sub">Track your hours, know your pay.</p>
-    <div id="login-error" class="login-error hidden"></div>
-    <div id="login-fields" class="login-fields"></div>
-    <button id="login-submit" class="login-btn"></button>
-    <p id="login-toggle-text" class="login-toggle"></p>
+    <h1 id="lt">Welcome back</h1>
+    <p id="ls">Track your hours. Know your pay.</p>
+    <div id="lerr" class="lerr hide"></div>
+    <div id="lf"></div>
+    <button id="lbtn"></button>
+    <p id="ltog"></p>
   </div>
 </div>
 
-<!-- ── APP ── -->
-<div id="app" class="app hidden">
-
-  <!-- TOP BAR -->
-  <header class="topbar">
-    <div class="topbar-left">
-      <div class="app-logo">
-        <svg width="20" height="20" viewBox="0 0 32 32" fill="none">
-          <circle cx="16" cy="16" r="14" stroke="#4f8ef7" stroke-width="2"/>
-          <path d="M16 8v8l5 3" stroke="#4f8ef7" stroke-width="2" stroke-linecap="round"/>
+<!-- APP -->
+<div id="app" class="hide">
+  <div class="hdr">
+    <span class="htitle" id="htitle">Calculator</span>
+    <div class="hright">
+      <span class="hclock" id="hclock"></span>
+      <button class="hbtn" id="btn-exp" title="Export CSV">
+        <svg width="22" height="22" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 3v13M7 11l5 5 5-5M4 18h16"/>
         </svg>
-        <span>TimeCard</span>
-      </div>
-    </div>
-    <div class="topbar-right">
-      <div id="live-clock" class="live-clock"></div>
-      <button id="btn-export" class="icon-btn" title="Export CSV">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 3v13M7 11l5 5 5-5M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
-      <button id="btn-logout" class="icon-btn" title="Sign out">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M16 17l5-5-5-5M21 12H9M13 7V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2h6a2 2 0 002-2v-2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <button class="hbtn" id="btn-out" title="Sign out">
+        <svg width="22" height="22" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round">
+          <path d="M17 16l4-4-4-4M21 12H9M13 6V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2h6a2 2 0 002-2v-1"/>
+        </svg>
       </button>
     </div>
-  </header>
-
-  <!-- CLOCK IN BANNER -->
-  <div class="ci-banner" id="ci-banner">
-    <div class="ci-status">
-      <span class="ci-dot" id="ci-dot"></span>
-      <span id="ci-label">Not clocked in</span>
-      <span id="ci-timer" class="ci-timer"></span>
-    </div>
-    <button id="btn-ci" class="ci-btn">Clock In</button>
   </div>
 
-  <!-- PAGE CONTENT -->
-  <main id="page" class="page"></main>
+  <div class="cibar">
+    <div class="cil">
+      <span class="dot" id="dot"></span>
+      <span id="cilbl">Not clocked in</span>
+      <span class="ctmr" id="ctmr"></span>
+    </div>
+    <button class="cibtn" id="btn-ci">Clock In</button>
+  </div>
 
-  <!-- BOTTOM NAV -->
-  <nav class="bottom-nav">
-    <button class="bn-item active" data-tab="calculator">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="4" y="2" width="16" height="20" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M9 7h6M9 12h6M9 17h3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-      <span>Calculator</span>
+  <div id="pg"></div>
+
+  <nav class="bnav">
+    <button class="btab on" data-tab="calculator">
+      <svg viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="2" width="18" height="20" rx="3"/><path d="M8 7h8M8 12h8M8 17h4"/></svg>
+      <span>Calc</span>
     </button>
-    <button class="bn-item" data-tab="history">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 8v4l3 3M3.05 11a9 9 0 1 0 .5-3M3 4v4h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <button class="btab" data-tab="history">
+      <svg viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" fill="none" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
       <span>History</span>
     </button>
-    <button class="bn-item" data-tab="calendar">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M8 2v4M16 2v4M3 10h18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+    <button class="btab" data-tab="calendar">
+      <svg viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" fill="none" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg>
       <span>Calendar</span>
     </button>
-    <button class="bn-item" data-tab="settings">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.8"/><path d="M12 1v3M12 20v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M1 12h3M20 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+    <button class="btab" data-tab="settings">
+      <svg viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" fill="none" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
       <span>Settings</span>
     </button>
   </nav>
 </div>
+
+<div id="toast" style="opacity:0"></div>
 
 <script src="app.js"></script>
 </body>
